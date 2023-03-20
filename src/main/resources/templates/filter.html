@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter Reviews</title>
+</head>
+<body>
+<h1>Filter Reviews</h1>
+<form th:action="@{/reviews/filtered}" method="get">
+    <label for="prioritizeByText">Prioritize Reviews with Text:</label>
+    <input type="checkbox" id="prioritizeByText" name="prioritizeByText" th:checked="${prioritizeByText}"/>
+    <br><br>
+
+    <label for="minimumRating">Minimum Rating:</label>
+    <select id="minimumRating" name="minimumRating" th:selected="${minimumRating}">
+        <option value="1">1 Star</option>
+        <option value="2">2 Stars</option>
+        <option value="3">3 Stars</option>
+        <option value="4">4 Stars</option>
+        <option value="5">5 Stars</option>
+    </select>
+    <br><br>
+
+    <label for="orderByRating">Order by Rating:</label>
+    <select id="orderByRating" name="orderByRating" th:selected="${orderByRating}">
+        <option value="Highest First">Highest First</option>
+        <option value="Lowest First">Lowest First</option>
+    </select>
+    <br><br>
+
+    <label for="orderByDate">Order by Date:</label>
+    <select id="orderByDate" name="orderByDate" th:selected="${orderByDate}">
+        <option value="Newest First">Newest First</option>
+        <option value="Oldest First">Oldest First</option>
+    </select>
+    <br><br>
+
+    <button type="submit">Filter</button>
+</form>
+
+<h2>Filtered Reviews:</h2>
+<ul>
+    <li th:each="review : ${filteredReviews}">
+        <p>Rating: <span th:text="${review.rating}"></span></p>
+        <p>Date: <span th:text="${review.reviewCreatedOnDate}"></span></p>
+        <p>Text: <span th:text="${review.reviewText}"></span></p>
+    </li>
+</ul>
+</body>
+</html>
